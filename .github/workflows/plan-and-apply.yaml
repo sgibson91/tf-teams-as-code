@@ -4,9 +4,15 @@ on:
   push:
     branches:
       - main
+    paths:
+      - teams.yaml
+      - tf-config/**
   pull_request:
     branches:
       - main
+    paths:
+      - teams.yaml
+      - tf-config/**
 
 env:
   GCLOUD_VERSION: 553.0.0
