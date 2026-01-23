@@ -1,7 +1,10 @@
-name: Plan changes to GitHub Teams Membership
+name: Plan and apply changes to GitHub Teams Membership
 
 on:
-  pull_requests:
+  push:
+    branches:
+      - main
+  pull_request:
     branches:
       - main
 
@@ -33,3 +36,7 @@ jobs:
       
       - working-dir: tf-config
         run: tofu plan
+
+      - if: github.event_name != 'pull_request'
+        working-dir: tf-config
+        run: tofu apply -auto-approve
