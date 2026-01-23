@@ -1,3 +1,3 @@
-output "teams_as_yaml" {
-    value = local.yaml_data
+output "teams_map" {
+    value = local.teams_map
 }
