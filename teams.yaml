@@ -5,3 +5,10 @@
   permissions:
   - repo: repo1
     role: admin
+- name: team-two
+  description: The second team
+  permissions:
+  - repo: repo2
+    role: maintain
+  - repo: repo3
+    role: maintain
