@@ -16,4 +16,16 @@ locals {
     ]
   ])
   team_repo_map = { for item in local.team_repo_permissions : item.key => item }
+  
+  # Flatten team-member relationships for github_team_membership resource
+  team_memberships = flatten([
+    for team in local.yaml_data : [
+      for member in lookup(team, "members", []) : {
+        team_name = team.name
+        username  = member
+        key       = "${team.name}-${member}"
+      }
+    ]
+  ])
+  team_membership_map = { for item in local.team_memberships : item.key => item }
 }
