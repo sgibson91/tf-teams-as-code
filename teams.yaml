@@ -11,7 +11,5 @@
     - da5nsy
     - JimMadge
   permissions:
-  - repo: repo2
-    role: maintain
-  - repo: repo3
+  - repo: website-builder
     role: maintain
