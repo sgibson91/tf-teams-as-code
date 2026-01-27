@@ -1,0 +1,15 @@
+- name: team-one
+  description: The first team
+  members:
+  - sgibson91
+  permissions:
+  - repo: repo1
+    role: admin
+- name: team-two
+  description: The second team
+  members:
+    - da5nsy
+    - JimMadge
+  permissions:
+  - repo: website-builder
+    role: maintain
