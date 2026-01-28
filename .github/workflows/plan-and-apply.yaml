@@ -19,7 +19,7 @@ env:
   TOFU_VERSION: 1.11.4
 
 jobs:
-  plan:
+  plan-apply:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
