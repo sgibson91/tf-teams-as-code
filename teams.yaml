@@ -10,7 +10,6 @@
   members:
     - da5nsy
     - JimMadge
-    - BrainonSilicon
   permissions:
   - repo: website-builder
     role: maintain
