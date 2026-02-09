@@ -1,8 +1,11 @@
 locals {
-  yaml_path     = "${path.root}/.."
+  yaml_path     = "${path.root}/../teams"
   yaml_filename = "${var.team}.yaml"
   yaml_data     = yamldecode(file("${local.yaml_path}/${local.yaml_filename}"))
-  teams_map     = { for team in local.yaml_data : team.name => team }
+
+  # Extract team name and description
+  team_name        = local.yaml_data.name
+  team_description = local.yaml_data.description
 
   # # Flatten team-repository permissions for github_team_repository resource
   # team_repo_permissions = flatten([
