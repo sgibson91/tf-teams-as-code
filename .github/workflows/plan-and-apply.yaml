@@ -58,7 +58,7 @@ jobs:
     needs: generate-matrix
     strategy:
       matrix:
-        include: "${{ needs.generate-matrix.outputs.team-matrix }}"
+        include: "${{ fromJSON(needs.generate-matrix.outputs.team-matrix) }}"
     steps:
       - uses: actions/checkout@v6
 
