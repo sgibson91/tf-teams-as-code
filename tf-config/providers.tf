@@ -1,6 +1,7 @@
 terraform {
   backend "gcs" {
-    bucket = "teams-as-code-tfstate"
+    bucket             = "teams-as-code-tfstate"
+    prefix             = var.team
     kms_encryption_key = "projects/supple-tracker-380219/locations/europe-west2/keyRings/tfstate-encryption/cryptoKeys/tfstate-encryption-key"
   }
 
