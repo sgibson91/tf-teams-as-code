@@ -5,13 +5,13 @@ on:
     branches:
       - main
     paths:
-      - teams.yaml
+      - teams/**
       - tf-config/**
   pull_request:
     branches:
       - main
     paths:
-      - teams.yaml
+      - teams/**
       - tf-config/**
 
 env:
@@ -19,8 +19,46 @@ env:
   TOFU_VERSION: 1.11.4
 
 jobs:
+  generate-matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      team-matrix: ${{ steps.generate-matrix.outputs.teams-matrix }}
+    steps:
+      - uses: actions/checkout@v6
+
+      - id: generate-matrix
+        shell: bash
+        run: |
+          # Initialize the list
+          list="["
+
+          # Loop over all .yaml files in ./teams
+          first=true
+          for file in ./teams/*.yaml; do
+              # Extract filename without path and .yaml extension
+              filename=$(basename "$file" .yaml)
+              
+              # Add comma separator for all but the first item
+              if [ "$first" = true ]; then
+                  list="${list}{\"team\": \"$filename\"}"
+                  first=false
+              else
+                  list="${list}, {\"team\": \"$filename\"}"
+              fi
+          done
+
+          # Close the list
+          list="${list}]"
+
+          # Output the result
+          echo "teams-matrix=${list}" >> "$GITHUB_OUTPUT"
+
   plan-apply:
     runs-on: ubuntu-latest
+    needs: generate-matrix
+    strategy:
+      matrix:
+        include: "${{ fromJSON(needs.generate-matrix.outputs.team-matrix) }}"
     steps:
       - uses: actions/checkout@v6
 
@@ -39,14 +77,18 @@ jobs:
 
       - working-directory: tf-config
         run: tofu init
+        env:
+          TF_VAR_team: "${{ matrix.team }}"
       
       - working-directory: tf-config
         run: tofu plan
         env:
           TF_VAR_github_token: "${{ secrets.GH_TOKEN }}"
+          TF_VAR_team: "${{ matrix.team }}"
 
       - if: github.event_name != 'pull_request'
         working-directory: tf-config
         run: tofu apply -auto-approve
         env:
           TF_VAR_github_token: "${{ secrets.GH_TOKEN }}"
+          TF_VAR_team: "${{ matrix.team }}"

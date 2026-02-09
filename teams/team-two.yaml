@@ -1,0 +1,9 @@
+name: team-two
+description: The second team
+members:
+  - da5nsy
+  - JimMadge
+  - BrainonSilicon
+permissions:
+- repo: website-builder
+  role: maintain
