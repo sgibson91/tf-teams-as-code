@@ -3,7 +3,7 @@ locals {
   yaml_filename = "${var.team}.yaml"
   yaml_data     = yamldecode(file("${local.yaml_path}/${local.yaml_filename}"))
   teams_map     = { for team in local.yaml_data : team.name => team }
-  
+
   # # Flatten team-repository permissions for github_team_repository resource
   # team_repo_permissions = flatten([
   #   for team in local.yaml_data : [
@@ -16,7 +16,7 @@ locals {
   #   ]
   # ])
   # team_repo_map = { for item in local.team_repo_permissions : item.key => item }
-  
+
   # # Flatten team-member relationships for github_team_membership resource
   # team_memberships = flatten([
   #   for team in local.yaml_data : [
