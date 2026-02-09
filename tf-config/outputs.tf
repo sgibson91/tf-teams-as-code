@@ -1,11 +1,15 @@
-output "teams_map" {
-  value = local.teams_map
+# output "team_repo_permissions" {
+#   value = local.team_repo_permissions
+# }
+
+output "team_name" {
+  value = local.team_name
 }
 
-output "team_repo_permissions" {
-  value = local.team_repo_permissions
+output "team_description" {
+  value = local.team_description
 }
 
-output "team_membership_map" {
-  value = local.team_membership_map
+output "team_members" {
+  value = local.yaml_data.members
 }
