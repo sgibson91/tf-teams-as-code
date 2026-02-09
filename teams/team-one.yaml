@@ -1,0 +1,6 @@
+name: team-one
+description: first team
+members: []
+permissions:
+  - repo: repo1
+    role: admin
