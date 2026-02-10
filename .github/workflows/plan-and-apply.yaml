@@ -81,6 +81,9 @@ jobs:
           TF_VAR_team: "${{ matrix.team }}"
       
       - working-directory: tf-config
+        run: tofu workspace select "${{ matrix.team }}"
+
+      - working-directory: tf-config
         run: tofu plan
         env:
           TF_VAR_github_token: "${{ secrets.GH_TOKEN }}"
