@@ -80,7 +80,7 @@ jobs:
         run: tofu init
         env:
           TF_VAR_team: "${{ matrix.team }}"
-      
+
       - working-directory: tf-config
         run: tofu workspace select -or-create $TF_VAR_team
         env:
