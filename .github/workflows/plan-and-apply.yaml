@@ -42,8 +42,6 @@ jobs:
 
       - working-directory: tf-config
         run: tofu workspace select -or-create main
-        env:
-          TF_VAR_github_token: "${{ secrets.GH_TOKEN }}"
 
       - working-directory: tf-config
         run: tofu plan
