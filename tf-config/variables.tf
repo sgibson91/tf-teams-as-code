@@ -6,7 +6,6 @@ variable "github_token" {
 variable "github_organization" {
   type        = string
   default     = "sgibson91-test-org"
-  type        = string
   description = "The name/slug of the GitHub organisation to operate within"
 }
 
