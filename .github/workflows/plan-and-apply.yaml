@@ -83,7 +83,9 @@ jobs:
           TF_VAR_team: "${{ matrix.team }}"
       
       - working-directory: tf-config
-        run: tofu workspace select "${{ matrix.team }}"
+        run: tofu workspace select $TF_VAR_team
+        env:
+          TF_VAR_team: "${{ matrix.team }}"
 
       - working-directory: tf-config
         run: tofu plan
