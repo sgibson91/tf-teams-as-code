@@ -5,12 +5,14 @@ on:
     branches:
       - main
     paths:
+      - .github/workflows/plan-and-apply.yaml
       - teams/**
       - tf-config/**
   pull_request:
     branches:
       - main
     paths:
+      - .github/workflows/plan-and-apply.yaml
       - teams/**
       - tf-config/**
 
@@ -80,6 +82,11 @@ jobs:
         env:
           TF_VAR_team: "${{ matrix.team }}"
       
+      - working-directory: tf-config
+        run: tofu workspace select $TF_VAR_team
+        env:
+          TF_VAR_team: "${{ matrix.team }}"
+
       - working-directory: tf-config
         run: tofu plan
         env:
