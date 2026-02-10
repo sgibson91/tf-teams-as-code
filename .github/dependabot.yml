@@ -4,7 +4,7 @@ updates:
     directory: "/"
     schedule:
       interval: "monthly"
-  - package-ecosystem: "terraform"
+  - package-ecosystem: "opentofu"
     directory: "tf-config"
     schedule:
       interval: "monthly"
