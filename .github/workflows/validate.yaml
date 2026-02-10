@@ -20,7 +20,7 @@ jobs:
 
       - run: |
           python -m pip install -U pip
-          python -m pip install ruamel.yaml typer
+          python -m pip install jsonschema ruamel.yaml typer
 
       - run: |
           python scripts/validate-yaml.py teams.yaml teams.schema.yaml
