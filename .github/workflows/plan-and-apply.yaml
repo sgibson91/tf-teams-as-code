@@ -10,9 +10,6 @@ on:
   pull_request:
     branches:
       - main
-    paths:
-      - teams.yaml
-      - tf-config/**
 
 env:
   GCLOUD_VERSION: 553.0.0
@@ -41,7 +38,7 @@ jobs:
         run: tofu init
 
       - working-directory: tf-config
-        run: tofu workspace select -or-create main
+        run: tofu workspace select -or-create split-teams-test
 
       - working-directory: tf-config
         run: tofu plan
