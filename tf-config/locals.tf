@@ -15,6 +15,19 @@ locals {
   ])
   team_repo_map = { for item in local.team_repo_permissions : item.key => item }
 
+  # Transform data into repo-centric format: repo -> list of {team, role}
+  repo_teams_map = {
+    for repo in distinct([for perm in local.team_repo_permissions : perm.repo]) :
+    repo => [
+      for perm in local.team_repo_permissions :
+      {
+        team = perm.team_name
+        role = perm.role
+      }
+      if perm.repo == repo
+    ]
+  }
+
   # Flatten team-member relationships for github_team_membership resource
   team_memberships = flatten([
     for team in local.teams_map : [
@@ -26,4 +39,8 @@ locals {
     ]
   ])
   team_membership_map = { for item in local.team_memberships : item.key => item }
+}
+
+output "repo_teams_map" {
+  value = local.repo_teams_map
 }
